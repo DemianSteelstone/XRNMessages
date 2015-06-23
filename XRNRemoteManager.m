@@ -48,7 +48,7 @@
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     
-    [currentInstallation setChannels:@[[self languageChannel]]];
+    [currentInstallation setChannels:@[[self languageChannel],@"global"]];
     
     [currentInstallation saveInBackground];
 }
