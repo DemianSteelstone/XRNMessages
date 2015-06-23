@@ -8,10 +8,8 @@
 
 #import "XRNMessage.h"
 
-@class BlockAlertView;
-
 @interface XRNAlertMessage : XRNMessage
 
--(BlockAlertView*)buildAlertView;
+-(UIAlertView*)buildAlertView;
 
 @end

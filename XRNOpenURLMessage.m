@@ -8,16 +8,16 @@
 
 #import "XRNOpenURLMessage.h"
 
-#import "BlockAlertView.h"
+#import <BlocksKit/BlocksKit+UIKit.h>
 
 @implementation XRNOpenURLMessage
 
--(BlockAlertView*)buildAlertView
+-(UIAlertView*)buildAlertView
 {
-    BlockAlertView *alertView = [super buildAlertView];
+    UIAlertView *alertView = [super buildAlertView];
     
-    [alertView addButton:NSLocalizedString(@"Cancel", @"") withBlock:nil];
-    [alertView addButton:NSLocalizedString(@"View", @"") withBlock:^(BlockAlertView *alert) {
+    [alertView bk_setCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"") handler:nil];
+    [alertView bk_addButtonWithTitle:NSLocalizedString(@"View", @"") handler:^{
         NSURL *url = [NSURL URLWithString:self.dictionary[XRNMessageURLField]];
         [[UIApplication sharedApplication] openURL:url];
     }];
