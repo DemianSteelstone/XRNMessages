@@ -7,11 +7,11 @@
 //
 
 #import "XRNAlertMessage.h"
-#import "BlockAlertView.h"
+#import <BlocksKit/BlocksKit+UIKit.h>
 
 @implementation XRNAlertMessage
 
--(BlockAlertView*)buildAlertView
+-(UIAlertView*)buildAlertView
 {
     NSString *title = self.dictionary[XRNMessageTitleField];
     if (title.length == 0)
@@ -21,19 +21,16 @@
     if (body.length == 0)
         body = self.dictionary[@"aps"][@"alert"];
     
-    BlockAlertView *alertView = [[BlockAlertView alloc] initWithTitle:title message:body];
+    UIAlertView *alertView = [[UIAlertView alloc] bk_initWithTitle:title message:body];
     
     return alertView;
 }
 
 -(void)handle
 {
-    BlockAlertView *alertView = [self buildAlertView];
+    UIAlertView *alertView = [self buildAlertView];
     if (alertView.numberOfButtons == 0)
-    {
-        [alertView addButton:NSLocalizedString(@"Ok", @"") withBlock:nil];
-        alertView.cancelButtonIndex = 0;
-    }
+        [alertView bk_setCancelButtonWithTitle:NSLocalizedString(@"Ok", @"") handler:nil];
     
     [alertView show];
 }
